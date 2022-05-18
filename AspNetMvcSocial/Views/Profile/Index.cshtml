@@ -1,0 +1,93 @@
+﻿@model User
+
+<div class="user_profile">
+    <div class="div1">
+        <div class="div2">
+            <img src="@Model.ProfileImageThumb" alt="" />
+        </div>
+        <div class="div3">
+            <img class="user_profile_photo" src="@Model.ProfileImagePath" alt="" />
+        </div>
+    </div>
+
+
+    <div class="user_profile_area">
+        <div class="profile_settings">
+            @if (@Model.UserName == User.Identity.Name)
+            {
+                <div class="profile_settings_button_area">
+                    <a href="">
+                        <span>Edit Profile</span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="profile_settings_button_area">
+                    <a href="">
+                        <span>Follow</span>
+                    </a>
+                </div>
+            }
+
+        </div>
+        @if (@Model.IsActive == false)
+        {
+            <div class="user_profile_name">
+                <span>@Model.Name</span>
+            </div>
+        }
+        else
+        {
+            <div class="user_profile_name">
+                <span>@Model.Name </span> <i class="fa-solid fa-check"></i>
+            </div>
+        }
+        <div class="user_profile_user_name">
+            <span>@@@Model.UserName</span>
+        </div>
+        <div class="user_profile_special">
+            <i class="fa-solid fa-archway"></i>
+            <span>@(((DateTime)Model.CreatedAt).ToString("MMMM yyyy")) joined</span>
+        </div>
+        <div class="user_profile_follow">
+            <div class="follower">
+                <span class="user_count">50</span>
+                <span class="user_follow">Followed</span>
+            </div>
+            <div class="user_profile_followed">
+                <div class="followed">
+                    <span class="user_count">50</span>
+                    <span class="user_follow">Follower</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="user_prfile_sec">
+    <li>
+        <a href="">Tweets</a>
+    </li>
+    <li>
+        <a href="">Tweets and Responses</a>
+    </li>
+    <li>
+        <a href="">Media</a>
+    </li>
+    <li>
+        <a href="">Like</a>
+    </li>
+</div>
+@await Component.InvokeAsync("User")
+
+
+
+
+
+@section Sidebar{
+<partial name="_Search" />
+@await Component.InvokeAsync("Trend")
+<partial name="_Trends" />
+<partial name="_Footer" />
+
+}
